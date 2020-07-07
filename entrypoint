@@ -109,6 +109,7 @@ fi
 /usr/sbin/postconf -e mailbox_transport=lmtp:unix:private/dovecot-lmtp
 /usr/sbin/postconf -e virtual_mailbox_domains=/etc/postfix/vhost
 /usr/sbin/postconf -e virtual_mailbox_maps=hash:/etc/postfix/vmailbox
+/usr/sbin/postconf -e smtpd_use_tls=no
 /usr/sbin/postconf compatibility_level=2
 
 # Create user account

@@ -3,8 +3,8 @@ FROM ubuntu:16.04
 MAINTAINER antespi@gmail.com
 
 ENV MAILNAME=localdomain.test \
-    MAIL_ADDRESS= \
-    MAIL_PASS= \
+    MAIL_ADDRESS="" \
+    MAIL_PASS="" \
     MAIL_FS_USER=docker \
     MAIL_FS_HOME=/home/docker
 
@@ -38,11 +38,11 @@ ADD postfix /etc/postfix
 COPY dovecot/auth-passwdfile.inc /etc/dovecot/conf.d/
 COPY dovecot/??-*.conf /etc/dovecot/conf.d/
 
-ADD entrypoint /usr/local/bin/
-RUN chmod a+rx /usr/local/bin/entrypoint
 
 VOLUME ["/var/mail"]
 EXPOSE 25 143 993
 
+ADD entrypoint /usr/local/bin/
+RUN chmod a+rx /usr/local/bin/entrypoint
 ENTRYPOINT ["/usr/local/bin/entrypoint"]
 CMD ["tail", "-fn", "0", "/var/log/mail.log"]
